@@ -1,0 +1,10 @@
+project_id = "hjvnpokxerctjrwjzjyr"
+
+[functions.weather]
+verify_jwt = false
+
+[functions.nlp-query]
+verify_jwt = false
+
+[functions.predict-ml]
+verify_jwt = false

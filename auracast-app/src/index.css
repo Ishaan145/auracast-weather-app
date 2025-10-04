@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AuraCast Design System - NASA Space Apps Challenge Theme */
+
+@layer base {
+  :root {
+    /* Cosmic Space Theme - Transparent for animated background */
+    --background: 0 0% 0% / 0;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 10% / 0.4;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 10% / 0.7;
+    --popover-foreground: 0 0% 98%;
+
+    /* NASA Brand Colors - Deep Space Blue to Cosmic Purple */
+    --primary: 217 91% 60%; /* NASA Blue */
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 217 91% 50%;
+    --primary-glow: 217 91% 70%;
+
+    --secondary: 250 80% 62%; /* Cosmic Purple */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 15% 15% / 0.3;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 189 100% 42%; /* Space Cyan */
+    --accent-foreground: 0 0% 98%;
+
+    /* Risk Level Colors */
+    --risk-low: 142 76% 36%;
+    --risk-low-bg: 142 71% 45%;
+    --risk-medium: 38 92% 50%;
+    --risk-medium-bg: 45 93% 47%;
+    --risk-high: 0 72% 51%;
+    --risk-high-bg: 0 84% 60%;
+
+    /* Weather Condition Colors */
+    --weather-hot: 14 91% 51%;
+    --weather-cold: 221 83% 53%;
+    --weather-wind: 142 71% 45%;
+    --weather-rain: 210 100% 50%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18% / 0.3;
+    --input: 220 15% 15% / 0.5;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* NASA Space Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(250 80% 62%));
+    --gradient-space: linear-gradient(135deg, hsl(222 20% 6%), hsl(220 15% 10%), hsl(220 15% 8%));
+    --gradient-aurora: linear-gradient(135deg, hsl(217 91% 60% / 0.2), hsl(189 100% 42% / 0.2));
+    --gradient-risk-low: linear-gradient(135deg, hsl(var(--risk-low)), hsl(var(--risk-low-bg)));
+    --gradient-risk-medium: linear-gradient(135deg, hsl(var(--risk-medium)), hsl(var(--risk-medium-bg)));
+    --gradient-risk-high: linear-gradient(135deg, hsl(var(--risk-high)), hsl(var(--risk-high-bg)));
+    --gradient-cosmic: linear-gradient(135deg, hsl(250 80% 62%), hsl(189 100% 42%));
+
+    /* Space Shadows */
+    --shadow-lg: 0 10px 25px -3px hsl(0 0% 0% / 0.3), 0 4px 6px -2px hsl(0 0% 0% / 0.1);
+    --shadow-aurora: 0 0 60px hsl(var(--primary-glow) / 0.4);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.3);
+    --shadow-cosmic: 0 0 80px hsl(250 80% 62% / 0.5);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Space Background Effect */
+  .aurora-bg {
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-space);
+  }
+  
+  .aurora-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.2), transparent 70%);
+    filter: blur(80px);
+    animation: cosmic-float 8s ease-in-out infinite;
+  }
+  
+  .aurora-bg::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, hsl(var(--secondary) / 0.2), transparent 70%);
+    filter: blur(80px);
+    animation: cosmic-float 10s ease-in-out infinite reverse;
+  }
+
+  /* Risk Level Indicators */
+  .risk-low {
+    background: var(--gradient-risk-low);
+    color: white;
+  }
+  
+  .risk-medium {
+    background: var(--gradient-risk-medium);
+    color: white;
+  }
+  
+  .risk-high {
+    background: var(--gradient-risk-high);
+    color: white;
+  }
+
+  /* Glass Morphism Effect */
+  .glass {
+    background: rgba(15, 20, 30, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Interactive Elements */
+  .interactive-hover {
+    transition: var(--transition-smooth);
+  }
+  
+  .interactive-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-aurora);
+  }
+}
+
+@layer utilities {
+  /* Custom Animations */
+  @keyframes cosmic-float {
+    0%, 100% {
+      opacity: 0.2;
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      opacity: 0.4;
+      transform: translate(20px, -20px) scale(1.05);
+    }
+    66% {
+      opacity: 0.3;
+      transform: translate(-20px, 20px) scale(0.95);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 50px hsl(var(--primary) / 0.8);
+    }
+  }
+
+  @keyframes starfield {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100px);
+    }
+  }
+
+  @keyframes move-particles {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(50px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes scan-line {
+    0% {
+      top: -2%;
+    }
+    100% {
+      top: 102%;
+    }
+  }
+
+  @keyframes nebula-float-1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.15;
+    }
+    33% {
+      transform: translate(30px, -30px) scale(1.1);
+      opacity: 0.25;
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.95);
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes nebula-float-2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.12;
+    }
+    33% {
+      transform: translate(-40px, 30px) scale(1.15);
+      opacity: 0.2;
+    }
+    66% {
+      transform: translate(25px, -25px) scale(0.9);
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes nebula-float-3 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.1;
+    }
+    50% {
+      transform: translate(20px, -40px) scale(1.2);
+      opacity: 0.18;
+    }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .animate-starfield {
+    animation: starfield 100s linear infinite;
+  }
+
+  .animate-nebula-float-1 {
+    animation: nebula-float-1 25s ease-in-out infinite;
+  }
+
+  .animate-nebula-float-2 {
+    animation: nebula-float-2 30s ease-in-out infinite;
+  }
+
+  .animate-nebula-float-3 {
+    animation: nebula-float-3 20s ease-in-out infinite;
+  }
+
+  .animate-scan-line {
+    animation: scan-line 12s linear infinite;
+  }
+
+  /* Starfield layers using CSS background patterns */
+  .stars-layer-1 {
+    background-image: 
+      radial-gradient(1px 1px at 20% 30%, white, transparent),
+      radial-gradient(1px 1px at 60% 70%, white, transparent),
+      radial-gradient(2px 2px at 50% 50%, white, transparent),
+      radial-gradient(1px 1px at 80% 10%, white, transparent),
+      radial-gradient(1px 1px at 90% 60%, white, transparent),
+      radial-gradient(2px 2px at 33% 80%, white, transparent);
+    background-size: 200px 200px, 250px 250px, 300px 300px, 150px 150px, 180px 180px, 220px 220px;
+    background-position: 0 0, 40px 60px, 80px 120px, 120px 40px, 160px 80px, 200px 160px;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  .stars-layer-2 {
+    background-image: 
+      radial-gradient(1px 1px at 40% 20%, white, transparent),
+      radial-gradient(1px 1px at 70% 60%, white, transparent),
+      radial-gradient(1px 1px at 10% 80%, white, transparent),
+      radial-gradient(2px 2px at 85% 40%, white, transparent),
+      radial-gradient(1px 1px at 25% 90%, white, transparent);
+    background-size: 220px 220px, 180px 180px, 240px 240px, 160px 160px, 200px 200px;
+    background-position: 0 0, 30px 50px, 60px 100px, 90px 30px, 120px 140px;
+    animation: twinkle 5s ease-in-out infinite 1s;
+  }
+
+  .stars-layer-3 {
+    background-image: 
+      radial-gradient(2px 2px at 15% 45%, hsl(217 91% 70%), transparent),
+      radial-gradient(1px 1px at 55% 25%, hsl(189 100% 50%), transparent),
+      radial-gradient(1px 1px at 75% 75%, hsl(250 80% 70%), transparent),
+      radial-gradient(2px 2px at 35% 65%, hsl(217 91% 70%), transparent);
+    background-size: 300px 300px, 250px 250px, 280px 280px, 200px 200px;
+    background-position: 0 0, 50px 70px, 100px 140px, 150px 50px;
+    animation: twinkle 6s ease-in-out infinite 2s;
+  }
+
+  /* Data particles layer */
+  .particles-layer {
+    background-image: 
+      radial-gradient(2px 2px at 10% 100%, hsl(217 91% 60%), transparent),
+      radial-gradient(1px 1px at 30% 100%, hsl(189 100% 42%), transparent),
+      radial-gradient(2px 2px at 50% 100%, hsl(250 80% 62%), transparent),
+      radial-gradient(1px 1px at 70% 100%, hsl(217 91% 60%), transparent),
+      radial-gradient(2px 2px at 90% 100%, hsl(189 100% 42%), transparent),
+      radial-gradient(1px 1px at 15% 100%, hsl(250 80% 62%), transparent),
+      radial-gradient(2px 2px at 45% 100%, hsl(217 91% 60%), transparent),
+      radial-gradient(1px 1px at 65% 100%, hsl(189 100% 42%), transparent),
+      radial-gradient(2px 2px at 85% 100%, hsl(250 80% 62%), transparent);
+    background-size: 300px 100vh, 350px 100vh, 280px 100vh, 320px 100vh, 290px 100vh, 340px 100vh, 310px 100vh, 270px 100vh, 330px 100vh;
+    background-position: 0 0;
+    animation: move-particles 25s linear infinite;
+    filter: blur(0.5px);
+  }
+
+  /* Font Family */
+  .font-inter {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* 3D Perspective Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
